@@ -6,5 +6,5 @@ const ic =require("../controllers/interncontroller")
 
 router.post("/colleges",cc.createCollege)
 router.post("/interns",ic.createIntern)
-router.get("/all",cc.getcollege)
+router.get("/collegeDetails",cc.getcollege)
 module.exports = router;

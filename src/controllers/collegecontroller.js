@@ -8,6 +8,10 @@ const createCollege= async function(req,res){
     if(!Object.keys(data).length) 
     return res.status(400).send({status: false, msg: "You must enter data."})
 
+    if (!data.name)  res.status(400).send({status: false, msg: "name required."})
+
+    if (data.fullName==0)  res.status(400).send({status: false, msg: "fullName required."})
+
     let allData =await collegemodel.create(data)
      res.status(200).send({msg:allData})}
    
@@ -16,11 +20,19 @@ const createCollege= async function(req,res){
 
 
  const getCollege =async function(req,res){
+     try{
      let data =req.query.collegeName
-     let alldata =await collegemodel.findOne({name:data})
-     let getdata =await internmodel.find({collegeId : alldata._id}).select({name:1 ,_id:0})
-     res.send(getdata)
+     if(!data) res.status(400).send({msg:"give the proper collegeName"})
+     let alldata =await collegemodel.findOne({name:data})//.select({name:1 ,fullName:1, logoLink:1,})
+     let getdata =await internmodel.find({collegeId:alldata._id}).select({name:1,email:1,mobile:1})//.populate('collegeId')
+     res.status(201).send({data:{
+         "name":alldata.name,
+          "fullName":alldata.fullName,
+          "logoLink":alldata.logoLink,
+          "interest": getdata}
+     })
  }
-
+ catch(err){ res.status(400).send({status: false, msg: err.message})}
+ }
  module.exports.createCollege=createCollege
  module.exports.getcollege=getCollege
