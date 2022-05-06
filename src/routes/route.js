@@ -4,7 +4,7 @@ const router = express.Router();
 const cc =require("../controllers/collegecontroller")
 const ic =require("../controllers/interncontroller")
 
-router.post("/functionp/colleges",cc.createCollege)
-router.post("/functionp/interns",ic.createIntern)
-router.get("/functionup/collegeDetails",cc.getcollege)
+router.post("/functionUp/colleges",cc.createCollege)
+router.post("/functionUp/interns",ic.createIntern)
+router.get("/functionUp/collegeDetails",cc.getcollege)
 module.exports = router;
