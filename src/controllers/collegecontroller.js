@@ -17,7 +17,7 @@ const createCollege= async function(req,res){
     if(!data.logoLink) return res.status(400).send({msg:"logoLink required"})
 
     let allData =await collegemodel.create(data)
-     res.status(200).send({msg:allData})}
+     res.status(201).send({msg:allData})}
    
   catch(err){ res.status(500).send({status: false, msg: err.message})} 
  }
