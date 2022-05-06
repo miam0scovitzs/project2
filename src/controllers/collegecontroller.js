@@ -29,7 +29,7 @@ const createCollege= async function(req,res){
      if(!data) res.status(400).send({msg:"give the proper collegeName"})
      let alldata =await collegemodel.findOne({name:data})//.select({name:1 ,fullName:1, logoLink:1,})
      let getdata =await internmodel.find({collegeId:alldata._id}).select({name:1,email:1,mobile:1})//.populate('collegeId')
-     res.status(201).send({data:{
+     res.status(200).send({data:{
          "name":alldata.name,
           "fullName":alldata.fullName,
           "logoLink":alldata.logoLink,
