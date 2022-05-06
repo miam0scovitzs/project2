@@ -10,9 +10,11 @@ const createCollege= async function(req,res){
     const a = await collegemodel.findOne({name:data.name})
     if(!a.length) return res.status(400).send("name already exists")
 
-    if (!data.name)  res.status(400).send({status: false, msg: "name required."})
+    if (!data.name) return res.status(400).send({status: false, msg: "name required."})
 
-    if (data.fullName==0)  res.status(400).send({status: false, msg: "fullName required."})
+    if (!data.fullName) return  res.status(400).send({status: false, msg: "fullName required."})
+
+    if(!data.logoLink) return res.status(400).send({msg:"logoLink required"})
 
     let allData =await collegemodel.create(data)
      res.status(200).send({msg:allData})}
