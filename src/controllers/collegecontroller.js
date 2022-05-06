@@ -7,6 +7,8 @@ const createCollege= async function(req,res){
         let data =req.body
     if(!Object.keys(data).length) 
     return res.status(400).send({status: false, msg: "You must enter data."})
+    const a = await collegemodel.findOne({name:data.name})
+    if(!a.length) return res.status(400).send("name already exists")
 
     if (!data.name)  res.status(400).send({status: false, msg: "name required."})
 
